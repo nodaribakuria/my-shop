@@ -1,5 +1,6 @@
 // ნივთების დამატება, ჩვენება და წაშლა
 import { auth, db } from "./firebase-config.js";
+import { startChat } from "./chat.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 import {
   collection,
@@ -187,6 +188,15 @@ function createCard(id, p) {
   buy.className = "buy-btn";
   buy.textContent = "კალათაში დამატება";
   card.appendChild(buy);
+
+  // "დაწერე გამყიდველს" ღილაკი ყველას, გარდა ნივთის მფლობელისა
+  if (!auth.currentUser || auth.currentUser.uid !== p.ownerId) {
+    const contact = document.createElement("button");
+    contact.className = "contact-btn";
+    contact.textContent = "💬 დაწერე გამყიდველს";
+    contact.addEventListener("click", () => startChat(id, p));
+    card.appendChild(contact);
+  }
 
   // წაშლა მხოლოდ ნივთის მფლობელს ეჩვენება
   if (auth.currentUser && auth.currentUser.uid === p.ownerId) {
