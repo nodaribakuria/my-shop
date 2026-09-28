@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ჩემი მაღაზია</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-top">
+      <div class="logo">MyShop</div>
+      <div class="search-bar">
+        <input type="text" placeholder="მოძებნე პროდუქტი...">
+        <button>🔍</button>
+      </div>
+      <div class="header-icons">
+        <span>❤️</span>
+        <span>🛒</span>
+        <span id="account-icon" title="ანგარიში">👤</span>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#">საწყისი</a>
+      <a href="#">ახალი პროდუქტები</a>
+      <a href="#">ფასდაკლებები</a>
+      <a href="#">კატეგორიები</a>
+    </nav>
+  </header>
+
+  <div id="auth-modal" class="modal hidden">
+    <div class="modal-box">
+      <span id="auth-close" class="modal-close">&times;</span>
+
+      <div class="auth-tabs">
+        <button id="tab-login" class="auth-tab active">შესვლა</button>
+        <button id="tab-register" class="auth-tab">რეგისტრაცია</button>
+      </div>
+
+      <form id="login-form" class="auth-form">
+        <input type="email" id="login-email" placeholder="ელ-ფოსტა" required>
+        <input type="password" id="login-password" placeholder="პაროლი" required>
+        <button type="submit" class="auth-submit">შესვლა</button>
+        <p id="login-error" class="auth-error"></p>
+      </form>
+
+      <form id="register-form" class="auth-form hidden">
+        <input type="text" id="register-name" placeholder="სახელი" required>
+        <input type="email" id="register-email" placeholder="ელ-ფოსტა" required>
+        <input type="password" id="register-password" placeholder="პაროლი (მინ. 6 სიმბოლო)" required>
+        <button type="submit" class="auth-submit">რეგისტრაცია</button>
+        <p id="register-error" class="auth-error"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="account-panel" class="modal hidden">
+    <div class="modal-box">
+      <span id="account-close" class="modal-close">&times;</span>
+      <h2>ჩემი ანგარიში</h2>
+      <p id="account-info"></p>
+      <button id="logout-btn" class="auth-submit">გასვლა</button>
+    </div>
+  </div>
+
+  <section class="banner">
+    <h1>დიდი ფასდაკლებები ✨</h1>
+    <p>შეარჩიე საუკეთესო ფასად</p>
+  </section>
+
+  <main class="products">
+    <div class="product-card">
+      <img src="https://via.placeholder.com/250" alt="პროდუქტი">
+      <h3>პროდუქტის სახელი</h3>
+      <p class="price"><span class="new-price">14.66₾</span> <span class="old-price">28.85₾</span></p>
+      <button class="buy-btn">კალათაში დამატება</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/250" alt="პროდუქტი">
+      <h3>პროდუქტის სახელი</h3>
+      <p class="price"><span class="new-price">34.98₾</span> <span class="old-price">65.39₾</span></p>
+      <button class="buy-btn">კალათაში დამატება</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/250" alt="პროდუქტი">
+      <h3>პროდუქტის სახელი</h3>
+      <p class="price"><span class="new-price">9.59₾</span> <span class="old-price">15.68₾</span></p>
+      <button class="buy-btn">კალათაში დამატება</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/250" alt="პროდუქტი">
+      <h3>პროდუქტის სახელი</h3>
+      <p class="price"><span class="new-price">8.33₾</span> <span class="old-price">13.84₾</span></p>
+      <button class="buy-btn">კალათაში დამატება</button>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 MyShop. ყველა უფლება დაცულია.</p>
+  </footer>
+
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
