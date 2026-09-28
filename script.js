@@ -1,14 +1,13 @@
-﻿// კალათაში დამატების ღილაკები
-const buyButtons = document.querySelectorAll('.buy-btn');
+// "კალათაში დამატება" ღილაკები (მუშაობს ბაზიდან ჩატვირთულ ნივთებზეც)
+document.addEventListener("click", (e) => {
+  const button = e.target.closest(".buy-btn");
+  if (!button) return;
 
-buyButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    button.textContent = 'დამატებულია ✔';
-    button.style.background = '#28a745';
+  button.textContent = "დამატებულია ✔";
+  button.classList.add("added");
 
-    setTimeout(() => {
-      button.textContent = 'კალათაში დამატება';
-      button.style.background = '#ff6b00';
-    }, 1500);
-  });
+  setTimeout(() => {
+    button.textContent = "კალათაში დამატება";
+    button.classList.remove("added");
+  }, 1500);
 });

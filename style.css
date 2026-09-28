@@ -1,4 +1,4 @@
-﻿* {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -202,6 +202,7 @@ body {
   border-top: 1px solid #3a1a5c;
 }
 
+/* --- მოდალები (ავტორიზაცია/ანგარიში) --- */
 .modal {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -307,4 +308,90 @@ body {
 
 #account-icon {
   cursor: pointer;
+}
+
+/* --- ნივთების დამატება --- */
+.add-product-btn {
+  margin-left: auto;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #7b2ff7, #ff3cac);
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.add-product-btn:hover {
+  filter: brightness(1.15);
+}
+
+.auth-form textarea {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #3a1a5c;
+  background: #1f0d33;
+  color: #f0e6ff;
+  outline: none;
+  resize: vertical;
+}
+
+.auth-form textarea:focus {
+  border-color: #b83ce0;
+}
+
+.product-preview {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-preview.hidden {
+  display: none;
+}
+
+.products .empty-msg {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #8a76ab;
+  padding: 40px 0;
+}
+
+.product-card img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.product-card .desc {
+  font-size: 13px;
+  color: #b8a0d9;
+  margin-bottom: 8px;
+}
+
+.product-card .seller {
+  font-size: 12px;
+  color: #8a76ab;
+  margin-bottom: 10px;
+}
+
+.buy-btn.added {
+  background: #28a745;
+}
+
+.delete-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 6px;
+  background: transparent;
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 107, 107, 0.15);
 }
