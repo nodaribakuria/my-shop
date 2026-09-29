@@ -214,6 +214,12 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
+// გამოიძახება პროფილიდან: ჩათების სიის გახსნა
+export function openMyChats() {
+  openPanel();
+  showList();
+}
+
 // გამოიძახება ნივთის ბარათიდან: "დაწერე გამყიდველს"
 export async function startChat(productId, product) {
   const user = auth.currentUser;

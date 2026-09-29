@@ -30,7 +30,7 @@ body {
 .logo {
   font-size: 24px;
   font-weight: 800;
-  background: linear-gradient(90deg, #a259ff, #ff3cac);
+  background: linear-gradient(90deg, #a259ff, #c026d3);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -58,7 +58,7 @@ body {
 
 .search-bar button {
   border: none;
-  background: linear-gradient(90deg, #7b2ff7, #ff3cac);
+  background: linear-gradient(90deg, #7b2ff7, #c026d3);
   color: white;
   padding: 0 16px;
   border-radius: 0 20px 20px 0;
@@ -87,12 +87,12 @@ body {
 }
 
 .nav a:hover {
-  color: #ff59c7;
+  color: #d7c4ff;
 }
 
 /* ბანერი - სუნსეტის გრადიენტი */
 .banner {
-  background: linear-gradient(135deg, #1a0b3d 0%, #4b1d8c 35%, #a020a0 65%, #ff4fa3 100%);
+  background: linear-gradient(135deg, #1a0b3d 0%, #4b1d8c 35%, #a020a0 65%, #c026d3 100%);
   color: #fff;
   text-align: center;
   padding: 60px 20px;
@@ -166,7 +166,7 @@ body {
 }
 
 .new-price {
-  color: #ff59c7;
+  color: #d7c4ff;
   font-weight: 700;
   font-size: 16px;
 }
@@ -181,7 +181,7 @@ body {
 .buy-btn {
   width: 100%;
   padding: 8px;
-  background: linear-gradient(90deg, #7b2ff7, #ff3cac);
+  background: linear-gradient(90deg, #7b2ff7, #c026d3);
   color: white;
   border: none;
   border-radius: 8px;
@@ -238,7 +238,7 @@ body {
 }
 
 .modal-close:hover {
-  color: #ff59c7;
+  color: #d7c4ff;
 }
 
 .auth-tabs {
@@ -259,8 +259,8 @@ body {
 }
 
 .auth-tab.active {
-  color: #ff59c7;
-  border-bottom: 2px solid #ff3cac;
+  color: #d7c4ff;
+  border-bottom: 2px solid #c026d3;
 }
 
 .auth-form {
@@ -290,7 +290,7 @@ body {
   padding: 10px;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(90deg, #7b2ff7, #ff3cac);
+  background: linear-gradient(90deg, #7b2ff7, #c026d3);
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -316,7 +316,7 @@ body {
   padding: 6px 16px;
   border: none;
   border-radius: 20px;
-  background: linear-gradient(90deg, #7b2ff7, #ff3cac);
+  background: linear-gradient(90deg, #7b2ff7, #c026d3);
   color: white;
   font-weight: 600;
   font-size: 13px;
@@ -472,7 +472,7 @@ body {
 .chat-back {
   background: none;
   border: none;
-  color: #ff59c7;
+  color: #d7c4ff;
   font-size: 20px;
   cursor: pointer;
 }
@@ -496,7 +496,7 @@ body {
 
 .chat-msg.mine {
   align-self: flex-end;
-  background: linear-gradient(90deg, #7b2ff7, #ff3cac);
+  background: linear-gradient(90deg, #7b2ff7, #c026d3);
   color: #fff;
 }
 
@@ -530,7 +530,7 @@ body {
   border: none;
   border-radius: 20px;
   padding: 0 16px;
-  background: linear-gradient(90deg, #7b2ff7, #ff3cac);
+  background: linear-gradient(90deg, #7b2ff7, #c026d3);
   color: #fff;
   font-weight: 600;
   cursor: pointer;
@@ -541,7 +541,7 @@ body {
   margin-top: 8px;
   padding: 8px;
   background: transparent;
-  color: #ff59c7;
+  color: #d7c4ff;
   border: 1px solid #b83ce0;
   border-radius: 8px;
   cursor: pointer;
@@ -551,4 +551,168 @@ body {
 
 .contact-btn:hover {
   background: rgba(184, 60, 224, 0.15);
+}
+
+.logo-img {
+  height: 72px;
+  width: auto;
+  display: block;
+  margin: -16px 0;
+  filter: drop-shadow(0 0 10px rgba(192, 38, 211, 0.55));
+}
+
+@media (max-width: 600px) {
+  .logo-img {
+    height: 52px;
+    margin: -8px 0;
+  }
+}
+
+/* --- პროფილის პანელი --- */
+.profile-box {
+  max-width: 420px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.avatar-wrap {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+}
+
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #b83ce0;
+}
+
+.avatar-edit {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #7b2ff7, #c026d3);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.profile-header strong {
+  display: block;
+  font-size: 15px;
+  color: #f0e6ff;
+}
+
+.profile-header small {
+  color: #b8a0d9;
+  font-size: 12px;
+}
+
+.profile-tabs {
+  display: flex;
+  border-bottom: 1px solid #3a1a5c;
+  margin-bottom: 14px;
+}
+
+.profile-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 8px;
+  color: #b8a0d9;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.profile-tab.active {
+  color: #d7cee0;
+  border-bottom: 2px solid #c026d3;
+}
+
+.profile-panel.hidden {
+  display: none;
+}
+
+.profile-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 14px;
+}
+
+.profile-item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1f0d33;
+  border: 1px solid #3a1a5c;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.profile-item-row img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.profile-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-item-info strong {
+  display: block;
+  font-size: 13px;
+  color: #f0e6ff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-item-info small {
+  color: #c026d3;
+  font-weight: 600;
+}
+
+.profile-item-row .delete-btn {
+  width: auto;
+  margin-top: 0;
+  padding: 6px 10px;
+  flex-shrink: 0;
+}
+
+.profile-hint {
+  color: #8a76ab;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.logout-btn {
+  margin-top: 6px;
+}
+
+.hidden {
+  display: none;
 }

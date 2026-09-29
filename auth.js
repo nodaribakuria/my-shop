@@ -1,4 +1,4 @@
-﻿// რეგისტრაცია, შესვლა და გასვლის ლოგიკა
+// რეგისტრაცია, შესვლა და გასვლის ლოგიკა
 import { auth } from "./firebase-config.js";
 import {
   createUserWithEmailAndPassword,
@@ -20,9 +20,11 @@ const registerForm = document.getElementById("register-form");
 const loginError = document.getElementById("login-error");
 const registerError = document.getElementById("register-error");
 
-const accountInfo = document.getElementById("account-info");
 const logoutBtn = document.getElementById("logout-btn");
+const profileName = document.getElementById("profile-name");
+const profileEmail = document.getElementById("profile-email");
 
+// მოდალის გახსნა/დახურვა
 function openModal(modal) {
   modal.classList.remove("hidden");
 }
@@ -33,6 +35,7 @@ function closeModal(modal) {
 document.getElementById("auth-close").addEventListener("click", () => closeModal(authModal));
 document.getElementById("account-close").addEventListener("click", () => closeModal(accountPanel));
 
+// ტაბების გადართვა (შესვლა / რეგისტრაცია)
 tabLogin.addEventListener("click", () => {
   tabLogin.classList.add("active");
   tabRegister.classList.remove("active");
@@ -47,6 +50,7 @@ tabRegister.addEventListener("click", () => {
   loginForm.classList.add("hidden");
 });
 
+// 👤 ხატულაზე დაჭერისას: თუ შესული ხარ → account panel, თუ არა → auth modal
 accountIcon.addEventListener("click", () => {
   if (auth.currentUser) {
     openModal(accountPanel);
@@ -55,6 +59,7 @@ accountIcon.addEventListener("click", () => {
   }
 });
 
+// რეგისტრაცია
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   registerError.textContent = "";
@@ -72,6 +77,7 @@ registerForm.addEventListener("submit", async (e) => {
   }
 });
 
+// შესვლა
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   loginError.textContent = "";
@@ -87,20 +93,24 @@ loginForm.addEventListener("submit", async (e) => {
   }
 });
 
+// გასვლა
 logoutBtn.addEventListener("click", async () => {
   await signOut(auth);
   closeModal(accountPanel);
 });
 
+// ავტორიზაციის სტატუსის მოსმენა — თუ შესულია, ვაჩვენოთ სახელი
 onAuthStateChanged(auth, (user) => {
   if (user) {
     accountIcon.title = user.displayName || user.email;
-    accountInfo.textContent = `შესული ხარ როგორც: ${user.displayName || user.email}`;
+    profileName.textContent = user.displayName || "მომხმარებელი";
+    profileEmail.textContent = user.email || "";
   } else {
     accountIcon.title = "ანგარიში";
   }
 });
 
+// შეცდომების თარგმნა ქართულად
 function translateError(code) {
   const errors = {
     "auth/email-already-in-use": "ეს ელ-ფოსტა უკვე დარეგისტრირებულია",
