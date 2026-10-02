@@ -222,18 +222,14 @@ function createCard(id, p) {
   seller.textContent = "გამყიდველი: " + (p.ownerName || "უცნობი");
   card.appendChild(seller);
 
-  const buy = document.createElement("button");
-  buy.className = "buy-btn";
-  buy.textContent = "კალათაში დამატება";
-  card.appendChild(buy);
-
-  // "დაწერე გამყიდველს" ღილაკი ყველას, გარდა ნივთის მფლობელისა
+  // "შეძენა" ღილაკი ყველას, გარდა ნივთის მფლობელისა — ხსნის ჩათს გამყიდველთან
+  // და ავტომატურად უგზავნის ნივთის ინფორმაციას
   if (!auth.currentUser || auth.currentUser.uid !== p.ownerId) {
-    const contact = document.createElement("button");
-    contact.className = "contact-btn";
-    contact.textContent = "💬 დაწერე გამყიდველს";
-    contact.addEventListener("click", () => startChat(id, p));
-    card.appendChild(contact);
+    const buy = document.createElement("button");
+    buy.className = "buy-btn";
+    buy.textContent = "🛒 შეძენა";
+    buy.addEventListener("click", () => startChat(id, p));
+    card.appendChild(buy);
   }
 
   // წაშლა მხოლოდ ნივთის მფლობელს ეჩვენება

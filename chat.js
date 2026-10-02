@@ -243,11 +243,32 @@ export async function startChat(productId, product) {
 
   try {
     const snap = await getDoc(chatRef);
-    if (!snap.exists()) {
+    const isNew = !snap.exists();
+
+    if (isNew) {
       await setDoc(chatRef, chatData);
     }
+
     openPanel();
-    openConversation(chatId, snap.exists() ? snap.data() : chatData);
+    openConversation(chatId, isNew ? chatData : snap.data());
+
+    // ახალი საუბრის შემთხვევაში ავტომატურად ვუგზავნით ნივთის ინფორმაციას,
+    // რომ გამყიდველმა იცოდეს რომელ ნივთზეა საუბარი
+    if (isNew) {
+      const priceText = Number(product.price).toFixed(2) + "₾";
+      const autoText = `🛒 დაინტერესდა ნივთით: "${product.title || ""}" — ${priceText}`;
+
+      await addDoc(collection(db, "chats", chatId, "messages"), {
+        text: autoText,
+        senderId: user.uid,
+        senderName: user.displayName || user.email,
+        createdAt: serverTimestamp()
+      });
+      await updateDoc(chatRef, {
+        lastMessage: autoText.slice(0, 80),
+        updatedAt: serverTimestamp()
+      });
+    }
   } catch (err) {
     console.error(err);
     alert("ჩათის გახსნა ვერ მოხერხდა");
