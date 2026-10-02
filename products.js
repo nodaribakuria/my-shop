@@ -16,6 +16,27 @@ import {
 const grid = document.querySelector(".products");
 const nav = document.querySelector(".nav");
 const authModal = document.getElementById("auth-modal");
+const categoryButtons = document.querySelectorAll(".category-chip");
+
+const CATEGORY_LABELS = {
+  tansacmeli: "ტანსაცმელი",
+  fexsacmeli: "ფეხსაცმელი",
+  satamashoebi: "სათამაშო",
+  eleqtronika: "ელექტრონიკა",
+  silamaze: "სილამაზე",
+  aqsesuarebi: "აქსესუარები"
+};
+
+let currentCategory = "all";
+
+categoryButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    categoryButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentCategory = btn.dataset.category;
+    render();
+  });
+});
 
 // "ნივთის დამატება" ღილაკი ნავიგაციაში
 const addBtn = document.createElement("button");
@@ -34,6 +55,15 @@ modal.innerHTML = `
       <input type="text" id="product-title" placeholder="ნივთის სახელი" maxlength="80" required>
       <input type="number" id="product-price" placeholder="ფასი (₾)" min="0" step="0.01" required>
       <input type="number" id="product-old-price" placeholder="ძველი ფასი (არასავალდებულო)" min="0" step="0.01">
+      <select id="product-category" required>
+        <option value="" disabled selected>აირჩიე კატეგორია</option>
+        <option value="tansacmeli">ტანსაცმელი</option>
+        <option value="fexsacmeli">ფეხსაცმელი</option>
+        <option value="satamashoebi">სათამაშო</option>
+        <option value="eleqtronika">ელექტრონიკა</option>
+        <option value="silamaze">სილამაზე</option>
+        <option value="aqsesuarebi">აქსესუარები</option>
+      </select>
       <textarea id="product-desc" placeholder="აღწერა" maxlength="500" rows="3"></textarea>
       <input type="file" id="product-image" accept="image/*" required>
       <img id="product-preview" class="product-preview hidden" alt="">
@@ -119,11 +149,13 @@ form.addEventListener("submit", async (e) => {
     }
 
     const oldPrice = document.getElementById("product-old-price").value;
+    const category = document.getElementById("product-category").value;
 
     await addDoc(collection(db, "products"), {
       title: document.getElementById("product-title").value.trim(),
       price: Number(document.getElementById("product-price").value),
       oldPrice: oldPrice ? Number(oldPrice) : null,
+      category: category,
       description: document.getElementById("product-desc").value.trim(),
       image: image,
       ownerId: user.uid,
@@ -157,6 +189,10 @@ function createCard(id, p) {
   const title = document.createElement("h3");
   title.textContent = p.title || "";
 
+  const categoryBadge = document.createElement("span");
+  categoryBadge.className = "category-badge";
+  categoryBadge.textContent = CATEGORY_LABELS[p.category] || "";
+
   const price = document.createElement("p");
   price.className = "price";
   const newPrice = document.createElement("span");
@@ -170,7 +206,9 @@ function createCard(id, p) {
     price.appendChild(oldPrice);
   }
 
-  card.append(img, title, price);
+  card.append(img, title);
+  if (categoryBadge.textContent) card.appendChild(categoryBadge);
+  card.appendChild(price);
 
   if (p.description) {
     const desc = document.createElement("p");
@@ -223,14 +261,23 @@ let lastDocs = [];
 
 function render() {
   grid.replaceChildren();
-  if (lastDocs.length === 0) {
+
+  const filtered =
+    currentCategory === "all"
+      ? lastDocs
+      : lastDocs.filter((d) => d.data().category === currentCategory);
+
+  if (filtered.length === 0) {
     const empty = document.createElement("p");
     empty.className = "empty-msg";
-    empty.textContent = "ჯერ ნივთები არ არის. დაამატე პირველი!";
+    empty.textContent =
+      currentCategory === "all"
+        ? "ჯერ ნივთები არ არის. დაამატე პირველი!"
+        : "ამ კატეგორიაში ჯერ ნივთი არ არის.";
     grid.appendChild(empty);
     return;
   }
-  lastDocs.forEach((d) => grid.appendChild(createCard(d.id, d.data())));
+  filtered.forEach((d) => grid.appendChild(createCard(d.id, d.data())));
 }
 
 // ნივთების ცოცხალი სია ბაზიდან

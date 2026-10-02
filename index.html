@@ -6,6 +6,9 @@
   <title>ჩემი მაღაზია</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -92,9 +95,23 @@
     </div>
   </div>
 
-  <section class="banner">
-    <h1>დიდი ფასდაკლებები ✨</h1>
-    <p>შეარჩიე საუკეთესო ფასად</p>
+  <section class="hero">
+    <img src="logo.png" alt="Nodo Shop" class="hero-logo">
+    <p class="hero-tagline">CURATED LUXURY &amp; OPULENCE</p>
+    <p class="hero-sub">საუკეთესო ნივთები, საუკეთესო ფასად</p>
+  </section>
+
+  <section class="categories">
+    <h2 class="section-title">კატეგორიები</h2>
+    <div class="category-list" id="category-list">
+      <button type="button" class="category-chip active" data-category="all">ყველა</button>
+      <button type="button" class="category-chip" data-category="tansacmeli">ტანსაცმელი</button>
+      <button type="button" class="category-chip" data-category="fexsacmeli">ფეხსაცმელი</button>
+      <button type="button" class="category-chip" data-category="satamashoebi">სათამაშო</button>
+      <button type="button" class="category-chip" data-category="eleqtronika">ელექტრონიკა</button>
+      <button type="button" class="category-chip" data-category="silamaze">სილამაზე</button>
+      <button type="button" class="category-chip" data-category="aqsesuarebi">აქსესუარები</button>
+    </div>
   </section>
 
   <main class="products">
