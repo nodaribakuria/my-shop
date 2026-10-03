@@ -17,6 +17,8 @@ const grid = document.querySelector(".products");
 const nav = document.querySelector(".nav");
 const authModal = document.getElementById("auth-modal");
 const categoryButtons = document.querySelectorAll(".category-chip");
+const searchInput = document.getElementById("search-input");
+const searchBtn = document.getElementById("search-btn");
 
 const CATEGORY_LABELS = {
   tansacmeli: "ტანსაცმელი",
@@ -28,6 +30,7 @@ const CATEGORY_LABELS = {
 };
 
 let currentCategory = "all";
+let currentSearch = "";
 
 categoryButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -36,6 +39,21 @@ categoryButtons.forEach((btn) => {
     currentCategory = btn.dataset.category;
     render();
   });
+});
+
+// საძიებო: ფილტრავს სახელითა და აღწერით, კატეგორიის პარალელურად
+function runSearch() {
+  currentSearch = searchInput.value.trim().toLowerCase();
+  render();
+}
+
+searchInput.addEventListener("input", runSearch);
+searchBtn.addEventListener("click", runSearch);
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    runSearch();
+  }
 });
 
 // "ნივთის დამატება" ღილაკი ნავიგაციაში
@@ -258,18 +276,30 @@ let lastDocs = [];
 function render() {
   grid.replaceChildren();
 
-  const filtered =
-    currentCategory === "all"
-      ? lastDocs
-      : lastDocs.filter((d) => d.data().category === currentCategory);
+  let filtered = lastDocs;
+
+  if (currentCategory !== "all") {
+    filtered = filtered.filter((d) => d.data().category === currentCategory);
+  }
+
+  if (currentSearch) {
+    filtered = filtered.filter((d) => {
+      const p = d.data();
+      const haystack = ((p.title || "") + " " + (p.description || "")).toLowerCase();
+      return haystack.includes(currentSearch);
+    });
+  }
 
   if (filtered.length === 0) {
     const empty = document.createElement("p");
     empty.className = "empty-msg";
-    empty.textContent =
-      currentCategory === "all"
-        ? "ჯერ ნივთები არ არის. დაამატე პირველი!"
-        : "ამ კატეგორიაში ჯერ ნივთი არ არის.";
+    if (currentSearch) {
+      empty.textContent = "ასეთი ნივთი ვერ მოიძებნა.";
+    } else if (currentCategory !== "all") {
+      empty.textContent = "ამ კატეგორიაში ჯერ ნივთი არ არის.";
+    } else {
+      empty.textContent = "ჯერ ნივთები არ არის. დაამატე პირველი!";
+    }
     grid.appendChild(empty);
     return;
   }
